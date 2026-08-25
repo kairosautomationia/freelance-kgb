@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const navigation = [
   { href: "#services", label: "Servicios" },
-  { href: "#process", label: "Cómo trabajamos" },
+  { href: "#operation", label: "Operación" },
   { href: "#coverage", label: "Cobertura" },
 ];
 
@@ -11,53 +11,49 @@ const services = [
   {
     number: "01",
     name: "Seguridad física",
-    summary:
-      "Personal preparado para cuidar accesos, instalaciones y puntos críticos de la operación.",
-    details: "Control de accesos, rondas de vigilancia y prevención ante incidentes.",
+    detail: "Personal preparado para accesos, instalaciones y puntos críticos.",
+    items: ["Control de accesos", "Rondas de vigilancia", "Prevención y respuesta"],
   },
   {
     number: "02",
     name: "Seguridad electrónica",
-    summary:
-      "Tecnología que mantiene la operación visible cuando más importa.",
-    details: "Cámaras, alarmas, sensores, candados satelitales y monitoreo especializado.",
+    detail: "Tecnología para mantener la operación visible y bajo control.",
+    items: ["Cámaras y sensores", "Alarmas", "Monitoreo especializado"],
   },
   {
     number: "03",
-    name: "Custodias para importación y exportación",
-    summary:
-      "Acompañamiento coordinado para que la mercancía avance con protocolos claros.",
-    details: "Custodias armadas, fluviales y acompañamiento según la ruta y el alcance requerido.",
+    name: "Custodias de carga",
+    detail: "Acompañamiento coordinado para mercancías en tránsito y almacenamiento.",
+    items: ["Importación y exportación", "Custodias armadas", "Custodias fluviales"],
   },
   {
     number: "04",
     name: "Inspecciones especializadas",
-    summary:
-      "Capas adicionales de verificación para operaciones que exigen mayor control.",
-    details: "Inspecciones K9 de sustancias sujetas a fiscalización y pruebas poligráficas.",
+    detail: "Verificaciones adicionales para operaciones que requieren mayor control.",
+    items: ["Inspecciones K9", "Sustancias fiscalizadas", "Pruebas poligráficas"],
   },
 ];
 
-const process = [
+const operationSteps = [
   {
     number: "01",
-    name: "Presencia",
-    detail: "Seguridad física para las personas, instalaciones y accesos que sostienen la operación.",
+    name: "Entender la carga",
+    detail: "Revisamos el tipo de mercancía, sus puntos sensibles y las condiciones de la operación.",
   },
   {
     number: "02",
-    name: "Visibilidad",
-    detail: "Cámaras, monitoreo y candados satelitales para leer lo que ocurre mientras la carga avanza.",
+    name: "Definir el control",
+    detail: "Ordenamos personal, tecnología y protocolos alrededor de la ruta que necesita protección.",
   },
   {
     number: "03",
-    name: "Tránsito",
-    detail: "Custodias y acompañamiento para operaciones de importación y exportación.",
+    name: "Acompañar el tránsito",
+    detail: "Integramos custodias y monitoreo para que la información llegue cuando hace falta decidir.",
   },
   {
     number: "04",
-    name: "Verificación",
-    detail: "Inspecciones K9 y pruebas especializadas como capas adicionales de control.",
+    name: "Verificar cada etapa",
+    detail: "Sumamos inspecciones especializadas cuando la operación necesita una capa adicional.",
   },
 ];
 
@@ -75,9 +71,17 @@ const serviceOptions = [
   description="Seguridad física, electrónica y custodia para operaciones de importación y exportación."
 >
   <div class="site-shell" id="top">
+    <div class="utility-bar">
+      <p><span class="utility-signal" aria-hidden="true"></span> Seguridad integral para importación y exportación</p>
+      <div class="utility-links">
+        <span>Cobertura nacional</span>
+        <a href="tel:+593985511942">098 551 1942</a>
+      </div>
+    </div>
+
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="KGB Security Services & Solutions, inicio">
-        <img src="/assets/kgb-logo-extracted-prototype.png" alt="KGB Security Services & Solutions" width="300" height="104" />
+      <a class="brand-lockup" href="#top" aria-label="KGB Security Services & Solutions, inicio">
+        <img src="/assets/kgb-logo-official.png" alt="KGB Security Services & Solutions" width="340" height="110" />
       </a>
 
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">
@@ -87,120 +91,131 @@ const serviceOptions = [
 
       <nav class="main-navigation" id="main-navigation" aria-label="Navegación principal">
         {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
-        <a class="nav-cta" href="#contact">Hablemos</a>
+        <a class="header-action" href="#contact">Solicitar evaluación <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy" data-reveal>
-          <p class="eyebrow">Seguridad para operaciones en movimiento</p>
-          <h1 id="hero-title">Tu carga sigue su ruta. <em>Nosotros cuidamos el proceso.</em></h1>
-          <p class="hero-lede">
-            Acompañamos operaciones de importación y exportación con seguridad física, tecnología de monitoreo y custodias coordinadas.
+          <p class="eyebrow"><span class="signal-dot" aria-hidden="true"></span> Seguridad para operaciones en movimiento</p>
+          <h1 id="hero-title">Protegemos la carga en cada decisión.</h1>
+          <p class="hero-intro">
+            Integramos personas, monitoreo y custodia para que tu operación de importación o exportación avance con un control claro.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#contact">Cuéntanos tu operación <span aria-hidden="true">↗</span></a>
-            <a class="text-link" href="#services">Conoce nuestros servicios <span aria-hidden="true">↓</span></a>
+            <a class="button button-primary" href="#contact">Solicitar una evaluación <span aria-hidden="true">↗</span></a>
+            <a class="quiet-link" href="#operation">Ver cómo trabajamos <span aria-hidden="true">↓</span></a>
           </div>
-          <dl class="hero-facts" aria-label="Alcances de KGB">
-            <div>
-              <dt>Alcance</dt>
-              <dd>Nacional</dd>
+
+          <div class="hero-board" aria-label="Capas de protección">
+            <div class="board-heading">
+              <span>Capas de protección</span>
+              <span class="board-status"><i aria-hidden="true"></i> Coordinadas</span>
             </div>
-            <div>
-              <dt>Disponibilidad</dt>
-              <dd>24/7</dd>
-            </div>
-            <div>
-              <dt>Especialidad</dt>
-              <dd>Import–export</dd>
-            </div>
-          </dl>
+            <div class="board-row"><span>01</span><strong>Presencia</strong><span>Personal y accesos</span></div>
+            <div class="board-row"><span>02</span><strong>Visibilidad</strong><span>Cámaras y monitoreo</span></div>
+            <div class="board-row"><span>03</span><strong>Tránsito</strong><span>Custodias y rutas</span></div>
+          </div>
         </div>
 
-        <figure class="hero-visual" data-reveal style="--reveal-delay: 90ms">
-          <div class="hero-image-wrap">
-            <img src="/assets/cargo-reference.png" alt="Contenedores y vehículo de seguridad junto a una operación portuaria" width="1200" height="900" />
-            <span class="image-note">Protección para una operación en movimiento.</span>
+        <div class="hero-media" data-reveal style="--reveal-delay: 90ms">
+          <figure class="hero-figure">
+            <img src="/assets/cargo-reference.png" alt="Contenedores y vehículo de seguridad en una operación portuaria" width="525" height="655" />
+            <figcaption>
+              <span>Cadena logística</span>
+              <strong>Origen <i aria-hidden="true">→</i> tránsito <i aria-hidden="true">→</i> destino</strong>
+            </figcaption>
+          </figure>
+          <div class="hero-media-note">
+            <span class="note-index">KGB / 01</span>
+            <p>Una misma lectura de seguridad para toda la ruta.</p>
           </div>
-          <figcaption>
-            <span>01</span>
-            <span>De origen a destino, cada etapa merece una mirada clara.</span>
-          </figcaption>
-        </figure>
+        </div>
       </section>
 
-      <div class="section-rule" aria-hidden="true"><span>Seguridad integral</span><span>Desde el primer control hasta la entrega</span></div>
+      <section class="proof-strip" aria-label="Alcances de KGB">
+        <div><span>01</span><strong>Seguridad física</strong><small>Personas y accesos</small></div>
+        <div><span>02</span><strong>Seguridad electrónica</strong><small>Visibilidad y monitoreo</small></div>
+        <div><span>03</span><strong>Custodias de carga</strong><small>Tránsito y almacenamiento</small></div>
+        <div><span>04</span><strong>Inspecciones K9</strong><small>Verificación especializada</small></div>
+      </section>
 
-      <section class="content-section services-section" id="services" aria-labelledby="services-title">
-        <div class="section-intro" data-reveal>
-          <p class="section-marker">01 · Servicios</p>
-          <h2 id="services-title">Una respuesta completa para lo que no puede detenerse.</h2>
-          <p>
-            Diseñamos el acompañamiento alrededor de tu operación: sus accesos, su ruta, su mercancía y el nivel de control que necesita.
-          </p>
-          <a class="text-link" href="#contact">Conversemos sobre tu alcance <span aria-hidden="true">↗</span></a>
+      <section class="section-block services-section" id="services" aria-labelledby="services-title">
+        <div class="section-heading" data-reveal>
+          <p class="section-kicker">01 / Servicios</p>
+          <h2 id="services-title">El control que tu operación necesita, en un solo equipo.</h2>
+          <p>Selecciona una capa o combinémoslas según el tipo de carga, la ruta y el nivel de exposición.</p>
         </div>
 
-        <div class="service-list">
+        <div class="service-board">
           {services.map((service, index) => (
-            <article class="service-item" data-reveal style={`--reveal-delay: ${index * 55}ms`}>
-              <div class="service-meta"><span>{service.number}</span><span>Servicio KGB</span></div>
-              <div class="service-content">
-                <h3>{service.name}</h3>
-                <p>{service.summary}</p>
-                <p class="service-detail">{service.details}</p>
-              </div>
-              <span class="service-arrow" aria-hidden="true">↗</span>
+            <article class="service-card" data-reveal style={`--reveal-delay: ${index * 55}ms`}>
+              <div class="service-card-top"><span>{service.number}</span><span>Servicio KGB</span></div>
+              <h3>{service.name}</h3>
+              <p>{service.detail}</p>
+              <ul>
+                {service.items.map((item) => <li>{item}</li>)}
+              </ul>
+              <a href="#contact" aria-label={`Solicitar información sobre ${service.name}`}>Consultar este servicio <span aria-hidden="true">↗</span></a>
             </article>
           ))}
         </div>
       </section>
 
-      <section class="process-section" id="process" aria-labelledby="process-title">
-        <div class="process-heading" data-reveal>
-          <p class="section-marker">02 · El proceso</p>
-          <h2 id="process-title">Cuatro capas alrededor de la operación.</h2>
-          <p>La seguridad se vuelve más útil cuando cada decisión tiene un lugar dentro de la ruta.</p>
+      <section class="operation-section" id="operation" aria-labelledby="operation-title">
+        <div class="operation-intro" data-reveal>
+          <p class="section-kicker">02 / Operación</p>
+          <h2 id="operation-title">La seguridad se organiza antes de que la carga se mueva.</h2>
+          <p>Convertimos el recorrido en decisiones concretas: qué observar, dónde intervenir y cuándo escalar.</p>
+          <a class="quiet-link quiet-link-light" href="#contact">Hablar sobre una ruta <span aria-hidden="true">↗</span></a>
         </div>
 
-        <div class="process-list">
-          {process.map((step, index) => (
-            <div class="process-row" data-reveal style={`--reveal-delay: ${index * 60}ms`}>
-              <span class="process-number">{step.number}</span>
-              <h3>{step.name}</h3>
-              <p>{step.detail}</p>
-              <span class="process-line" aria-hidden="true"></span>
-            </div>
+        <ol class="operation-list">
+          {operationSteps.map((step, index) => (
+            <li class="operation-step" data-reveal style={`--reveal-delay: ${index * 65}ms`}>
+              <span class="step-number">{step.number}</span>
+              <div>
+                <h3>{step.name}</h3>
+                <p>{step.detail}</p>
+              </div>
+              <span class="step-marker" aria-hidden="true"></span>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
-      <section class="coverage-section" id="coverage" aria-labelledby="coverage-title">
-        <div class="coverage-visual" data-reveal aria-hidden="true">
-          <div class="route-label route-label-start">Origen</div>
-          <div class="route-label route-label-middle">Tránsito</div>
-          <div class="route-label route-label-end">Destino</div>
-          <div class="route-line"><span class="route-dot"></span><span class="route-dot"></span><span class="route-dot"></span></div>
-          <div class="coverage-word">Nacional</div>
+      <section class="section-block coverage-section" id="coverage" aria-labelledby="coverage-title">
+        <div class="coverage-panel" data-reveal>
+          <div class="coverage-panel-header"><span>Alcance de la operación</span><span>Nacional</span></div>
+          <div class="coverage-route" aria-hidden="true">
+            <span class="route-node"><i></i><b>Puerto</b></span>
+            <span class="route-segment"></span>
+            <span class="route-node route-node-active"><i></i><b>Tránsito</b></span>
+            <span class="route-segment"></span>
+            <span class="route-node"><i></i><b>Destino</b></span>
+          </div>
+          <div class="coverage-panel-bottom"><strong>Cobertura nacional</strong><span>Personal, protocolos y monitoreo alrededor de la ruta.</span></div>
         </div>
+
         <div class="coverage-copy" data-reveal style="--reveal-delay: 90ms">
-          <p class="section-marker">03 · Cobertura</p>
-          <h2 id="coverage-title">La ruta cambia. El cuidado permanece.</h2>
-          <p>
-            Trabajamos con alcance nacional para acompañar los puntos que hacen posible tu operación de importación o exportación.
-          </p>
-          <p class="coverage-note">Cuéntanos desde dónde sale tu carga, hacia dónde va y qué necesitas proteger.</p>
-          <a class="button button-dark" href="#contact">Planificar una conversación <span aria-hidden="true">↗</span></a>
+          <p class="section-kicker">03 / Cobertura</p>
+          <h2 id="coverage-title">De todos los puertos a cada punto de control.</h2>
+          <p>El alcance cambia en cada operación. La coordinación, la visibilidad y la respuesta deben mantenerse conectadas.</p>
+          <div class="coverage-facts">
+            <div><strong>Nacional</strong><span>Alcance de servicio</span></div>
+            <div><strong>Control</strong><span>Coordinación por etapa</span></div>
+            <div><strong>Import–export</strong><span>Especialidad de KGB</span></div>
+          </div>
+          <a class="button button-outline" href="#contact">Definir el alcance <span aria-hidden="true">↗</span></a>
         </div>
       </section>
 
       <section class="contact-section" id="contact" aria-labelledby="contact-title">
-        <div class="contact-heading" data-reveal>
-          <p class="section-marker">04 · Contacto</p>
-          <h2 id="contact-title">Hablemos de tu operación.</h2>
-          <p>Cuéntanos qué estás moviendo y qué parte del proceso quieres hacer más segura.</p>
+        <div class="contact-intro" data-reveal>
+          <p class="section-kicker">04 / Cotización</p>
+          <h2 id="contact-title">Cuéntanos qué necesitas proteger.</h2>
+          <p>Con la información de tu operación podemos orientarte hacia la combinación de servicios adecuada.</p>
           <div class="contact-details">
             <a href="tel:+593985511942">098 551 1942</a>
             <a href="tel:+593979956335">097 995 6335</a>
@@ -209,6 +224,7 @@ const serviceOptions = [
         </div>
 
         <form class="contact-form" id="contact-form" data-reveal style="--reveal-delay: 90ms">
+          <div class="form-heading"><span>Solicitud de servicio</span><span>01 / 04</span></div>
           <div class="form-field">
             <label for="name">Tu nombre</label>
             <input id="name" name="name" type="text" autocomplete="name" placeholder="¿Con quién tenemos el gusto?" required />
@@ -225,7 +241,7 @@ const serviceOptions = [
             </select>
           </div>
           <div class="form-field form-field-wide">
-            <label for="message">Cuéntanos un poco más</label>
+            <label for="message">Detalles de la operación</label>
             <textarea id="message" name="message" rows="5" placeholder="Ruta, tipo de mercancía, tiempos o cualquier detalle útil." required></textarea>
           </div>
           <div class="form-submit">
@@ -238,12 +254,14 @@ const serviceOptions = [
 
     <footer class="site-footer">
       <div class="footer-brand">
-        <img src="/assets/kgb-logo-extracted-prototype.png" alt="KGB Security Services & Solutions" width="220" height="76" />
+        <a class="brand-lockup brand-lockup-footer" href="#top" aria-label="KGB Security Services & Solutions, inicio">
+          <img src="/assets/kgb-logo-official.png" alt="KGB Security Services & Solutions" width="280" height="90" />
+        </a>
         <p>Seguridad integral para importación y exportación.</p>
       </div>
-      <div class="footer-social">
+      <div class="footer-links">
         <a href="https://www.instagram.com/kgbsecurityservices" target="_blank" rel="noreferrer">Instagram <span aria-hidden="true">↗</span></a>
-        <a href="#top">Volver arriba <span aria-hidden="true">↑</span></a>
+        <a href="#contact">Solicitar evaluación <span aria-hidden="true">↗</span></a>
       </div>
       <p class="footer-legal">© {new Date().getFullYear()} KGB Security Services & Solutions</p>
     </footer>
