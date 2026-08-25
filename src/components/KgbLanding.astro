@@ -1,0 +1,256 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const { motion = false } = Astro.props;
+
+const services = [
+  {
+    number: "01",
+    title: "Seguridad física",
+    category: "Personas e instalaciones",
+    description: "Protección presencial, control de accesos y rondas para los puntos críticos de tu operación.",
+  },
+  {
+    number: "02",
+    title: "Seguridad electrónica",
+    category: "Visibilidad y control",
+    description: "Cámaras, alarmas y monitoreo para tomar decisiones con información oportuna.",
+  },
+  {
+    number: "03",
+    title: "Custodias de mercancía",
+    category: "Movimiento de carga",
+    description: "Acompañamiento coordinado para operaciones de importación y exportación.",
+  },
+  {
+    number: "04",
+    title: "Servicios especializados",
+    category: "Cumplimiento e inspección",
+    description: "Candados satelitales, inspecciones K9, custodias fluviales y pruebas especializadas por validar.",
+  },
+];
+
+const process = [
+  ["01", "Entender", "Revisamos la mercancía, la ruta y los puntos donde la operación necesita mayor control."],
+  ["02", "Diseñar", "Ordenamos personal, tecnología y protocolos alrededor del riesgo real de cada operación."],
+  ["03", "Coordinar", "Alineamos responsables y momentos críticos para que cada parte conozca su función."],
+  ["04", "Acompañar", "Mantenemos una lectura clara del proceso para responder cuando la operación lo necesita."],
+];
+---
+
+<BaseLayout
+  title="KGB · Seguridad integral para tu carga"
+  description="Protección física, electrónica y operativa para mercancías de importación y exportación."
+>
+  <div class:list={["site-shell", { "motion-variant": motion }]}>
+    <div class="prototype-bar">
+      <span>{motion ? "MOTION STUDY" : "PROTOTIPO V0"}</span>
+      <span>Contenido y cobertura pendientes de confirmación</span>
+      <a class="variant-switch" href={motion ? "/" : "/motion"}>{motion ? "Versión base" : "Abrir motion study"} <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="KGB, volver al inicio">
+        <img src="/assets/kgb-logo-extracted-prototype.png" alt="KGB Security Services & Solutions" />
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#services">Servicios</a>
+        <a href="#process">Proceso</a>
+        <a href="#coverage">Cobertura</a>
+        <a class="nav-cta" href="#contact">Solicitar evaluación <span aria-hidden="true">↗</span></a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">Menú</button>
+    </header>
+
+    <nav id="mobile-menu" class="mobile-menu" aria-label="Navegación móvil">
+      <a href="#services">Servicios</a>
+      <a href="#process">Proceso</a>
+      <a href="#coverage">Cobertura</a>
+      <a href="#contact">Solicitar evaluación</a>
+    </nav>
+
+    <main>
+      <section id="top" class="hero section-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span>01 / KGB</span><span>Security Services &amp; Solutions</span></div>
+          <h1>Seguridad integral <em>para tu carga.</em></h1>
+          <p class="hero-lede">Protegemos lo que importa en cada etapa de tu operación de importación y exportación.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">Solicitar evaluación <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#services">Ver servicios <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-note">
+            <span class="marker">KGB</span>
+            <p>Personal, tecnología y protocolos coordinados alrededor de una operación segura.</p>
+          </div>
+        </div>
+
+        <figure class="hero-media">
+          <img src="/assets/cargo-reference.png" alt="Buque y contenedores junto a un vehículo de seguridad KGB" />
+          <figcaption>
+            <span>Referencia visual oficial</span>
+            <span>Fotografía operativa real pendiente</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="proof-strip" data-reveal aria-label="Pilares de la propuesta">
+        <div class="section-index">02</div>
+        <div class="proof-item"><strong>PERSONAL</strong><span>Capacitado para responder</span></div>
+        <div class="proof-item"><strong>TECNOLOGÍA</strong><span>Visibilidad para decidir</span></div>
+        <div class="proof-item"><strong>PROTOCOLOS</strong><span>Control para cada etapa</span></div>
+        <div class="proof-tail">KGB / 2026</div>
+      </section>
+
+      <section id="services" class="services section-grid" data-reveal>
+        <div class="section-intro">
+          <div class="eyebrow"><span>03 / Servicios</span><span>Ordenados por contexto</span></div>
+          <h2>Una capa de protección para cada punto crítico.</h2>
+          <p>Combinamos seguridad física, electrónica y acompañamiento operativo para que tu mercancía avance con más control.</p>
+        </div>
+        <div class="service-list">
+          {services.map((service) => (
+            <article class="service-row" data-reveal>
+              <span class="service-number">{service.number}</span>
+              <div class="service-title">
+                <span>{service.category}</span>
+                <h3>{service.title}</h3>
+              </div>
+              <p>{service.description}</p>
+              <span class="service-arrow" aria-hidden="true">↗</span>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="process" class="process section-grid dark-section" data-reveal>
+        <div class="section-intro">
+          <div class="eyebrow"><span>04 / Método</span><span>Modelo preliminar</span></div>
+          <h2>La seguridad también se diseña.</h2>
+          <p>Antes de hablar de una solución, entendemos cómo se mueve tu operación y qué debe permanecer bajo control.</p>
+        </div>
+        <div class="process-list">
+          {process.map(([number, title, description]) => (
+            <article class="process-row" data-reveal>
+              <span class="process-number">{number}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="coverage" class="coverage section-grid" data-reveal>
+        <div class="coverage-visual">
+          <span class="coverage-code">KGB / COVERAGE</span>
+          <div class="coverage-stamp">COBERTURA<br /><strong>POR<br />CONFIRMAR</strong></div>
+          <div class="coverage-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+        <div class="coverage-copy">
+          <div class="eyebrow"><span>05 / Alcance</span><span>Información verificable</span></div>
+          <h2>La confianza empieza por decir dónde estamos.</h2>
+          <p>La cobertura geográfica y los puertos atendidos se mostrarán aquí cuando estén confirmados por KGB. La precisión importa más que una promesa amplia.</p>
+          <div class="pending-note"><span>Dato pendiente</span><strong>País · ciudades · puertos · horarios</strong></div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact section-grid" data-reveal>
+        <div class="contact-copy">
+          <div class="eyebrow"><span>06 / Siguiente movimiento</span><span>Hablemos de tu operación</span></div>
+          <h2>Cuéntanos qué necesitas proteger.</h2>
+          <p>Una primera conversación nos permite entender la carga, la ruta y el punto donde necesitas más visibilidad.</p>
+          <div class="contact-reference">
+            <span>Datos de referencia de las piezas oficiales</span>
+            <strong>0985511942 · 0979956335</strong>
+            <strong>katherineguevara13@hotmail.com</strong>
+            <small>Confirmar antes de publicar.</small>
+          </div>
+        </div>
+
+        <form class="contact-form" id="request-form">
+          <label for="name">Nombre <span>*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required />
+
+          <label for="company">Empresa</label>
+          <input id="company" name="company" type="text" autocomplete="organization" placeholder="Nombre de tu empresa" />
+
+          <label for="service">¿Qué necesitas proteger?</label>
+          <select id="service" name="service">
+            <option value="">Selecciona una opción</option>
+            <option>Seguridad física</option>
+            <option>Seguridad electrónica y monitoreo</option>
+            <option>Custodia de mercancía</option>
+            <option>Servicio especializado</option>
+          </select>
+
+          <label for="message">Cuéntanos brevemente</label>
+          <textarea id="message" name="message" rows="4" placeholder="Ruta, tipo de operación o punto crítico"></textarea>
+
+          <button class="button button-primary" type="submit">Enviar solicitud <span aria-hidden="true">↗</span></button>
+          <p class="form-note" id="form-status" role="status">Demo v0 · formulario aún no conectado a un canal de recepción.</p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <img src="/assets/kgb-logo-extracted-prototype.png" alt="KGB" />
+        <span>Security Services &amp; Solutions</span>
+      </div>
+      <div class="footer-meta"><span>SEGURIDAD INTEGRAL</span><span>IMPORT / EXPORT</span><span>PROTOTIPO V0</span></div>
+    </footer>
+  </div>
+
+  <script>
+    const menuToggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+    const mobileMenu = document.querySelector<HTMLElement>(".mobile-menu");
+    const form = document.querySelector<HTMLFormElement>("#request-form");
+    const formStatus = document.querySelector<HTMLElement>("#form-status");
+
+    menuToggle?.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      mobileMenu?.classList.toggle("is-open", !isOpen);
+    });
+
+    mobileMenu?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menuToggle?.setAttribute("aria-expanded", "false");
+        mobileMenu.classList.remove("is-open");
+      });
+    });
+
+    const motionPage = document.querySelector<HTMLElement>(".motion-variant");
+    if (motionPage) {
+      const revealItems = motionPage.querySelectorAll<HTMLElement>("[data-reveal]");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduceMotion) {
+        revealItems.forEach((item) => item.setAttribute("data-visible", "true"));
+      } else {
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.setAttribute("data-visible", "true");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -100px 0px", threshold: 0.12 },
+        );
+        revealItems.forEach((item) => revealObserver.observe(item));
+      }
+    }
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (formStatus) {
+        formStatus.textContent = "Solicitud capturada en el prototipo. Falta conectar el canal real de recepción.";
+        formStatus.classList.add("is-complete");
+      }
+    });
+  </script>
+</BaseLayout>
+
+

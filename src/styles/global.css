@@ -10,6 +10,8 @@
   --blue-deep: #07508c;
   --muted: #627181;
   --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --measure: 68rem;
   --unit: 8px;
 }
@@ -45,6 +47,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   letter-spacing: .12em;
   text-transform: uppercase;
 }
+.prototype-bar a { text-decoration: underline; text-underline-offset: 3px; }
+.prototype-bar a:hover, .prototype-bar a:focus-visible { color: var(--blue-deep); }
 
 .site-header {
   width: min(var(--measure), 92vw);
@@ -82,8 +86,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .hero h1 em { display: block; color: var(--blue-deep); font-style: normal; }
 .hero-lede { max-width: 490px; margin: 0; color: var(--muted); font-size: clamp(1.05rem, 1.8vw, 1.3rem); line-height: 1.4; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 34px; }
-.button { display: inline-flex; align-items: center; justify-content: center; gap: 22px; min-height: 50px; padding: 13px 18px; border: 0; cursor: pointer; font-weight: 700; letter-spacing: .01em; transition: background .18s ease, color .18s ease, transform .18s ease; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 22px; min-height: 50px; padding: 13px 18px; border: 0; cursor: pointer; font-weight: 700; letter-spacing: .01em; transition: background 180ms var(--ease-out), color 180ms var(--ease-out), transform 160ms var(--ease-out); }
 .button:hover, .button:focus-visible { transform: translateY(-2px); }
+.button:active { transform: scale(.97); }
 .button-primary { background: var(--yellow); color: var(--ink); }
 .button-primary:hover, .button-primary:focus-visible { background: var(--ink); color: var(--white); }
 .text-link { display: inline-flex; align-items: center; gap: 8px; color: var(--blue-deep); font-size: 14px; font-weight: 700; }
@@ -162,6 +167,53 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .footer-brand span { color: var(--muted); font-size: 11px; }
 .footer-meta { display: flex; gap: 20px; color: var(--blue-deep); font-size: 10px; font-weight: 700; letter-spacing: .1em; }
 
+/* Motion study: explanation and spatial consistency, not decoration. */
+.motion-variant .hero-copy > *,
+.motion-variant .hero-media {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: motion-rise 520ms var(--ease-out) forwards;
+}
+.motion-variant .hero-copy > :nth-child(1) { animation-delay: 0ms; }
+.motion-variant .hero-copy > :nth-child(2) { animation-delay: 50ms; }
+.motion-variant .hero-copy > :nth-child(3) { animation-delay: 100ms; }
+.motion-variant .hero-copy > :nth-child(4) { animation-delay: 150ms; }
+.motion-variant .hero-copy > :nth-child(5) { animation-delay: 200ms; }
+.motion-variant .hero-media { transform: translateX(18px); animation-delay: 100ms; }
+.motion-variant .hero-media { position: relative; }
+.motion-variant .hero-media::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: calc(100% - 12px);
+  height: 2px;
+  background: var(--yellow);
+  opacity: 0;
+  pointer-events: none;
+  animation: motion-scan 1000ms var(--ease-in-out) 320ms both;
+}
+.motion-variant [data-reveal] {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 600ms var(--ease-in-out);
+}
+.motion-variant [data-reveal][data-visible] { clip-path: inset(0 0 0 0); }
+@media (hover: hover) and (pointer: fine) {
+  .motion-variant .service-row {
+    transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
+  }
+  .motion-variant .service-row:hover { transform: translateX(6px); }
+}
+@keyframes motion-rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes motion-scan {
+  0% { opacity: 0; transform: translateY(-100%); }
+  18% { opacity: .9; }
+  82% { opacity: .9; }
+  100% { opacity: 0; transform: translateY(510px); }
+}
+
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
 
 @media (max-width: 900px) {
@@ -221,4 +273,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  .motion-variant .hero-copy > *, .motion-variant .hero-media { opacity: 1; transform: none; animation: none; }
+  .motion-variant .hero-media::after { display: none; }
+  .motion-variant [data-reveal] { clip-path: inset(0); transition: none; }
 }
