@@ -31,10 +31,10 @@ const services = [
 ];
 
 const process = [
-  ["01", "Entender", "Revisamos la mercancía, la ruta y los puntos donde la operación necesita mayor control."],
-  ["02", "Diseñar", "Ordenamos personal, tecnología y protocolos alrededor del riesgo real de cada operación."],
-  ["03", "Coordinar", "Alineamos responsables y momentos críticos para que cada parte conozca su función."],
-  ["04", "Acompañar", "Mantenemos una lectura clara del proceso para responder cuando la operación lo necesita."],
+  ["01", "Presencia", "Seguridad física para las personas, instalaciones y accesos que sostienen la operación."],
+  ["02", "Visibilidad", "Cámaras, monitoreo y candados satelitales para leer lo que ocurre mientras la carga avanza."],
+  ["03", "Tránsito", "Custodias y acompañamiento para operaciones de importación y exportación, según el alcance confirmado."],
+  ["04", "Verificación", "Inspecciones K9 y pruebas especializadas como capas adicionales por validar con KGB."],
 ];
 ---
 
@@ -81,7 +81,7 @@ const process = [
           </div>
           <div class="hero-note">
             <span class="marker">KGB</span>
-            <p>Personal, tecnología y protocolos coordinados alrededor de una operación segura.</p>
+            <p>Seguridad física, electrónica, custodias y servicios especializados organizados según la operación.</p>
           </div>
         </div>
 
@@ -126,8 +126,8 @@ const process = [
       <section id="process" class="process section-grid dark-section" data-reveal>
         <div class="section-intro">
           <div class="eyebrow"><span>04 / Método</span><span>Modelo preliminar</span></div>
-          <h2>La seguridad también se diseña.</h2>
-          <p>Antes de hablar de una solución, entendemos cómo se mueve tu operación y qué debe permanecer bajo control.</p>
+          <h2>Cuatro capas alrededor de la operación.</h2>
+          <p>La protección no es una pieza aislada: se ordena según el lugar, el movimiento y el nivel de visibilidad que necesita cada carga.</p>
         </div>
         <div class="process-list">
           {process.map(([number, title, description]) => (
@@ -252,5 +252,4 @@ const process = [
     });
   </script>
 </BaseLayout>
-
 

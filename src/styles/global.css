@@ -170,34 +170,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
 /* Motion study: explanation and spatial consistency, not decoration. */
 .motion-variant .hero-copy > *,
 .motion-variant .hero-media {
-  opacity: 0;
   transform: translateY(8px);
-  animation: motion-rise 520ms var(--ease-out) forwards;
+  animation: motion-rise 460ms var(--ease-out) forwards;
 }
 .motion-variant .hero-copy > :nth-child(1) { animation-delay: 0ms; }
 .motion-variant .hero-copy > :nth-child(2) { animation-delay: 50ms; }
 .motion-variant .hero-copy > :nth-child(3) { animation-delay: 100ms; }
 .motion-variant .hero-copy > :nth-child(4) { animation-delay: 150ms; }
 .motion-variant .hero-copy > :nth-child(5) { animation-delay: 200ms; }
-.motion-variant .hero-media { transform: translateX(18px); animation-delay: 100ms; }
-.motion-variant .hero-media { position: relative; }
-.motion-variant .hero-media::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 12px;
-  width: calc(100% - 12px);
-  height: 2px;
-  background: var(--yellow);
-  opacity: 0;
-  pointer-events: none;
-  animation: motion-scan 1000ms var(--ease-in-out) 320ms both;
-}
+.motion-variant .hero-media { transform: translateX(12px); animation-delay: 100ms; }
 .motion-variant [data-reveal] {
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 600ms var(--ease-in-out);
+  transform: translateY(10px);
+  transition: transform 460ms var(--ease-out);
 }
-.motion-variant [data-reveal][data-visible] { clip-path: inset(0 0 0 0); }
+.motion-variant [data-reveal][data-visible] { transform: translateY(0); }
 @media (hover: hover) and (pointer: fine) {
   .motion-variant .service-row {
     transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
@@ -205,15 +191,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .motion-variant .service-row:hover { transform: translateX(6px); }
 }
 @keyframes motion-rise {
-  to { opacity: 1; transform: translateY(0); }
+  to { transform: translateY(0); }
 }
-@keyframes motion-scan {
-  0% { opacity: 0; transform: translateY(-100%); }
-  18% { opacity: .9; }
-  82% { opacity: .9; }
-  100% { opacity: 0; transform: translateY(510px); }
-}
-
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
 
 @media (max-width: 900px) {
@@ -273,7 +252,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-  .motion-variant .hero-copy > *, .motion-variant .hero-media { opacity: 1; transform: none; animation: none; }
-  .motion-variant .hero-media::after { display: none; }
-  .motion-variant [data-reveal] { clip-path: inset(0); transition: none; }
+  .motion-variant .hero-copy > *, .motion-variant .hero-media { transform: none; animation: none; }
+  .motion-variant [data-reveal] { transform: none; transition: none; }
 }
