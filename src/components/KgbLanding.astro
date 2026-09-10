@@ -52,6 +52,23 @@ const serviceOptions = [
   "Inspección especializada",
   "Necesito orientación",
 ];
+
+const contact = {
+  whatsappPrimary: {
+    display: "098 657 9409",
+    href: "https://wa.me/593986579409?text=Hola%20KGB%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n.",
+  },
+  whatsappSecondary: {
+    display: "098 551 1942",
+    href: "https://wa.me/593985511942?text=Hola%20KGB%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n.",
+  },
+  conventional: {
+    display: "04 501 4371",
+    href: "tel:+59345014371",
+  },
+  managementEmail: "kguevara@kgb-security.com",
+  commercialEmail: "tvelasquez@kgb-security.com",
+};
 ---
 
 <BaseLayout
@@ -74,7 +91,7 @@ const serviceOptions = [
           {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
         </div>
         <div class="header-actions">
-          <a class="header-phone" href="tel:+593985511942">098 551 1942</a>
+          <a class="header-phone" href={contact.whatsappPrimary.href} target="_blank" rel="noreferrer">WhatsApp {contact.whatsappPrimary.display}</a>
           <a class="header-cta" href="#contact">Solicitar cotización <span aria-hidden="true">↗</span></a>
         </div>
       </nav>
@@ -212,10 +229,27 @@ const serviceOptions = [
           <p class="kicker">Cotización</p>
           <h2 id="contact-title">Hablemos de tu operación.</h2>
           <p>Cuéntanos qué necesitas proteger y te orientaremos hacia la combinación de servicios adecuada.</p>
-          <div class="contact-details">
-            <a href="tel:+593985511942">098 551 1942</a>
-            <a href="tel:+593979956335">097 995 6335</a>
-            <a href="mailto:katherineguevara13@hotmail.com">katherineguevara13@hotmail.com</a>
+          <div class="contact-details" aria-label="Canales de contacto">
+            <div class="contact-detail">
+              <span>WhatsApp principal</span>
+              <a href={contact.whatsappPrimary.href} target="_blank" rel="noreferrer">{contact.whatsappPrimary.display}</a>
+            </div>
+            <div class="contact-detail">
+              <span>WhatsApp secundario</span>
+              <a href={contact.whatsappSecondary.href} target="_blank" rel="noreferrer">{contact.whatsappSecondary.display}</a>
+            </div>
+            <div class="contact-detail">
+              <span>Teléfono convencional</span>
+              <a href={contact.conventional.href}>{contact.conventional.display}</a>
+            </div>
+            <div class="contact-detail">
+              <span>Gerencia</span>
+              <a href={`mailto:${contact.managementEmail}`}>{contact.managementEmail}</a>
+            </div>
+            <div class="contact-detail">
+              <span>Comercial</span>
+              <a href={`mailto:${contact.commercialEmail}`}>{contact.commercialEmail}</a>
+            </div>
           </div>
         </div>
 
@@ -299,10 +333,40 @@ const serviceOptions = [
 
   const contactForm = document.querySelector<HTMLFormElement>("#contact-form");
   const formStatus = document.querySelector<HTMLElement>("#form-status");
+  const commercialEmail = "tvelasquez@kgb-security.com";
+  const managementEmail = "kguevara@kgb-security.com";
 
   contactForm?.addEventListener("submit", (event) => {
     event.preventDefault();
-    formStatus && (formStatus.textContent = "Gracias. Revisaremos los detalles de tu operación.");
-    contactForm.reset();
+
+    const formData = new FormData(contactForm);
+    const name = String(formData.get("name") ?? "").trim();
+    const company = String(formData.get("company") ?? "").trim();
+    const service = String(formData.get("service") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+    const subject = `Solicitud de cotización — ${company || name || "Nuevo contacto"}`;
+    const body = [
+      "Hola KGB,",
+      "",
+      "Me gustaría solicitar información sobre sus servicios.",
+      "",
+      `Nombre de contacto: ${name}`,
+      `Empresa: ${company}`,
+      `Servicio requerido: ${service}`,
+      "",
+      "Contexto de la operación:",
+      message,
+    ].join("\n");
+    const mailtoParams = new URLSearchParams({
+      cc: managementEmail,
+      subject,
+      body,
+    });
+
+    if (formStatus) {
+      formStatus.textContent = "Abriendo tu correo para completar el envío…";
+    }
+
+    window.location.href = `mailto:${commercialEmail}?${mailtoParams.toString()}`;
   });
 </script>
