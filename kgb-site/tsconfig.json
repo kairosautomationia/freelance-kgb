@@ -1,0 +1,7 @@
+{
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "strict": true
+  }
+}
